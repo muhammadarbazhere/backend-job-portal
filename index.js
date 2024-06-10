@@ -9,9 +9,21 @@ const path = require('path');
 const router = require('./routes/UserRoutes');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-app.use(cors({ credentials: true, origin: 'https://extraordinary-marigold-03735d.netlify.app' })); // Ensure origin is correct
+const allowedOrigins = ['http://localhost:5173', 'https://earnest-marigold-9863cd.netlify.app/'];
+
+app.use(cors({
+  credentials: true,
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
 app.use(cookieParser());
 app.use(express.json());
 
