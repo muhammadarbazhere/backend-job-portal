@@ -11,7 +11,7 @@ const router = require('./routes/UserRoutes');
 const app = express();
 const port = 3000;
 
-app.use(cors({ credentials: true, origin: 'http://localhost:5173' })); // Ensure origin is correct
+app.use(cors({ credentials: true, origin: 'https://extraordinary-marigold-03735d.netlify.app' })); // Ensure origin is correct
 app.use(cookieParser());
 app.use(express.json());
 
